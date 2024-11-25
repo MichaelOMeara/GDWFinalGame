@@ -14,6 +14,9 @@ public class DoorController : MonoBehaviour
     private BoxCollider2D solidCollider; // Non-trigger collider for blocking the player
     private BoxCollider2D triggerCollider; // Trigger collider for detecting the player
 
+    public string correctCode = "1234"; // The correct code to open the door
+    private string currentInput = ""; // Player's current input
+
     void Start()
     {
         // Store the initial position and calculate the target position
@@ -33,10 +36,32 @@ public class DoorController : MonoBehaviour
 
     void Update()
     {
-        // Check if the player is near and presses the E key
-        if (isPlayerNear && Input.GetKeyDown(KeyCode.E))
+        // Check if the player is near and interacting
+        if (isPlayerNear)
         {
-            isDoorOpening = true; // Start opening the door
+            foreach (char c in Input.inputString) // Capture player's numeric input
+            {
+                if (char.IsDigit(c))
+                {
+                    currentInput += c;
+                    Debug.Log("Current Input: " + currentInput);
+
+                    // If the input matches the correct code, open the door
+                    if (currentInput == correctCode)
+                    {
+                        Debug.Log("Code accepted! Door opening...");
+                        isDoorOpening = true;
+                        currentInput = ""; // Reset input
+                    }
+
+                    // Limit input length to the code length
+                    if (currentInput.Length >= correctCode.Length)
+                    {
+                        Debug.Log("Incorrect code. Try again.");
+                        currentInput = ""; // Reset input
+                    }
+                }
+            }
         }
 
         // If the door is opening, move it upward
@@ -70,6 +95,7 @@ public class DoorController : MonoBehaviour
         {
             isPlayerNear = false;
             DisplayInteractionPrompt(false);
+            currentInput = ""; // Reset input when the player leaves
         }
     }
 
@@ -77,7 +103,7 @@ public class DoorController : MonoBehaviour
     {
         if (show)
         {
-            Debug.Log("Press 'E' to open the door.");
+            Debug.Log("Enter the numeric code to open the door.");
         }
         else
         {
