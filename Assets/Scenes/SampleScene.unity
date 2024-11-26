@@ -307,7 +307,7 @@ GameObject:
   - component: {fileID: 367233809}
   m_Layer: 0
   m_Name: TestCeiling
-  m_TagString: Ground
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -880,6 +880,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 2
   moveDistance: 5
+  correctCode: 4321
 --- !u!1 &1545266527
 GameObject:
   m_ObjectHideFlags: 0
@@ -915,6 +916,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 2
   moveDistance: 5
+  correctCode: 5678
 --- !u!50 &1545266529
 Rigidbody2D:
   serializedVersion: 4
@@ -1134,6 +1136,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 2
   moveDistance: 5
+  correctCode: 8765
 --- !u!50 &1594013838
 Rigidbody2D:
   serializedVersion: 4
@@ -1465,6 +1468,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 2
   moveDistance: 5
+  correctCode: 1234
 --- !u!50 &1737531685
 Rigidbody2D:
   serializedVersion: 4
