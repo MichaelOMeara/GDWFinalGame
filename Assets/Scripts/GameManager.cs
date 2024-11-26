@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public TextMeshProUGUI GameOver;
+    //public TextMeshProUGUI GameOver;
     // Start is called before the first frame update
     void Start()
     {
