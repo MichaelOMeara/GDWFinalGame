@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    //public TextMeshProUGUI GameOver;
-    // Start is called before the first frame update
+    public TextMeshProUGUI GameOver;
+    //Start is called before the first frame update
     void Start()
     {
-        //GameOver.gameObject.SetActive(true);
+       GameOver.gameObject.SetActive(true);
     }
 
     // Update is called once per frame
