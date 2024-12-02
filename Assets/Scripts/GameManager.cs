@@ -30,7 +30,6 @@ public class GameManager : MonoBehaviour
     public void ResetScene()
     {
         // Reload the current scene
-        Debug.Log("Reset button clicked!");
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
