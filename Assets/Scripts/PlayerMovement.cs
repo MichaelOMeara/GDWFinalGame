@@ -8,10 +8,12 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce = 10f; // Force applied when jumping
     private bool isGrounded; // To check if the player is on the ground
     private Rigidbody2D rb;
+    private GameManager gameManager;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     void Update()
@@ -49,6 +51,15 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = false;
+        }
+    }
+
+
+    private void OnDestroy()
+    {
+        if (gameManager != null)
+        {
+            gameManager.PlayerDestroyed();
         }
     }
 }
