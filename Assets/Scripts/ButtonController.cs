@@ -37,6 +37,5 @@ public class ButtonController : MonoBehaviour
     private void RevealCode()
     {
         Debug.Log($"The numeric code is: {numericCode}");
-        // Optional: Display the code visually, e.g., in a UI element
     }
 }
