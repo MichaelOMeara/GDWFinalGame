@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class ButtonController : MonoBehaviour
 {
-    public string numericCode = "1234"; // The numeric code to reveal
+    public GameObject codePrefab; // The prefab containing the SpriteRenderer
+    private GameObject instantiatedCode; // Reference to the instantiated code object
     private bool canInteract = false; // Determines if the button is active
 
-    void Update()
+    private void Update()
     {
         // Check for mouse click and interaction
         if (Input.GetMouseButtonDown(0) && canInteract)
@@ -30,12 +31,17 @@ public class ButtonController : MonoBehaviour
 
     private void OnButtonPress()
     {
-        Debug.Log("Button pressed! Revealing numeric code...");
-        RevealCode();
+        Debug.Log("Button pressed! Displaying numeric code...");
+        DisplayCode();
     }
 
-    private void RevealCode()
+    private void DisplayCode()
     {
-        Debug.Log($"The numeric code is: {numericCode}");
+        // Instantiate the prefab at a specific position
+        Vector3 spawnPosition = new Vector3(11, 2, 0); // Adjust as needed
+        instantiatedCode = Instantiate(codePrefab, spawnPosition, Quaternion.identity);
+
+        // Destroy the instantiated prefab after 10 seconds
+        Destroy(instantiatedCode, 10f);
     }
 }
