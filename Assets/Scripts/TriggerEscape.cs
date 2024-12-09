@@ -37,6 +37,9 @@ public class TriggerEscape : MonoBehaviour
                 // Add functionality to the reset button
                 resetButton.onClick.AddListener(ResetScene);
             }
+
+            // Destroy GameObjects with the tag "Void"
+            DestroyVoidObjects();
         }
     }
 
@@ -44,5 +47,14 @@ public class TriggerEscape : MonoBehaviour
     {
         // Reload the current scene
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    private void DestroyVoidObjects()
+    {
+        GameObject[] voidObjects = GameObject.FindGameObjectsWithTag("Void");
+        foreach (GameObject voidObject in voidObjects)
+        {
+            Destroy(voidObject);
+        }
     }
 }

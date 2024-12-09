@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class VoidMovement : MonoBehaviour
 {
-    public float moveSpeed = 0.3f; // The speed at which the GameObject moves (adjust as needed)
+    public float normalSpeed = 0.3f;   // Default movement speed
+    public float maxSpeed = 2.0f;     // Maximum movement speed when far from the player
+    public float speedIncreaseRange = 5.0f; // Distance at which the speed starts increasing
+    public float returnToNormalRange = 2.0f; // Distance at which the speed returns to normal
+    public Transform player;          // Reference to the player's Transform
 
     private Rigidbody2D rb;
 
@@ -12,13 +16,38 @@ public class VoidMovement : MonoBehaviour
     {
         // Get the Rigidbody2D component attached to the GameObject
         rb = GetComponent<Rigidbody2D>();
+
+        // Find the player if not explicitly assigned
+        if (player == null)
+        {
+            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+            if (playerObj != null)
+            {
+                player = playerObj.transform;
+            }
+        }
     }
 
     void FixedUpdate()
     {
-        // Ensure only horizontal movement occurs, with vertical locked by Rigidbody2D settings
+        if (player == null) return; // Exit if the player is not found
+
+        // Calculate the distance to the player
+        float distanceToPlayer = Vector2.Distance(transform.position, player.position);
+
+        // Adjust the speed based on the distance
+        float currentSpeed = normalSpeed;
+        if (distanceToPlayer > returnToNormalRange)
+        {
+            currentSpeed = Mathf.Lerp(normalSpeed, maxSpeed, (distanceToPlayer - returnToNormalRange) / (speedIncreaseRange - returnToNormalRange));
+        }
+
+        // Ensure the speed stays within bounds
+        currentSpeed = Mathf.Clamp(currentSpeed, normalSpeed, maxSpeed);
+
+        // Move the object horizontally at the calculated speed
         Vector2 currentPosition = rb.position;
-        currentPosition.x += moveSpeed * Time.fixedDeltaTime; // Move rightward at the constant speed
+        currentPosition.x += currentSpeed * Time.fixedDeltaTime; // Move rightward at the calculated speed
 
         rb.MovePosition(currentPosition); // Apply the updated position to the Rigidbody2D
     }
