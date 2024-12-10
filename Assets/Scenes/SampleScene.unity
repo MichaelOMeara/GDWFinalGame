@@ -1133,10 +1133,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72f4f54172e9e3e46806f42a8092ac8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalSpeed: 0.2
-  maxSpeed: 3
+  normalSpeed: 0.4
+  maxSpeed: 6
   speedIncreaseRange: 25
-  returnToNormalRange: 11
+  returnToNormalRange: 9
   player: {fileID: 1855209316}
 --- !u!61 &364225759
 BoxCollider2D:
@@ -6622,7 +6622,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec9959dd2b82f8344839cfaf68cb0c6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 4
   jumpForce: 10
   climbSpeed: 3
   crouchingColliderSize: {x: 1, y: 1.77}
