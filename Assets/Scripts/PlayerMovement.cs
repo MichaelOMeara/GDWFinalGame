@@ -145,9 +145,15 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnDestroy()
     {
+        Debug.Log("Player destroyed. Attempting to call GameManager.PlayerDestroyed.");
         if (gameManager != null)
         {
             gameManager.PlayerDestroyed();
         }
+        else
+        {
+            Debug.LogWarning("GameManager is null during player destruction.");
+        }
     }
+
 }

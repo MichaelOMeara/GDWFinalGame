@@ -13,23 +13,40 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         // Ensure "Game Over" text and Reset button are hidden initially
-        GameOverText.gameObject.SetActive(false);
-        Reset.gameObject.SetActive(false);
-
-        // Attach the ResetScene method to the button's OnClick event
-        Reset.onClick.AddListener(ResetScene);
+        if (GameOverText != null)
+        {
+            GameOverText.gameObject.SetActive(false);
+        }
+        if (Reset != null)
+        {
+            Reset.gameObject.SetActive(false);
+            Reset.onClick.AddListener(ResetScene);
+        }
     }
 
     public void PlayerDestroyed()
     {
-        // Show the "Game Over" text and Reset button
-        GameOverText.gameObject.SetActive(true);
-        Reset.gameObject.SetActive(true);
+        if (GameOverText != null)
+        {
+            GameOverText.gameObject.SetActive(true);
+        }
+        else
+        {
+            Debug.LogWarning("GameOverText is null or destroyed.");
+        }
+
+        if (Reset != null)
+        {
+            Reset.gameObject.SetActive(true);
+        }
+        else
+        {
+            Debug.LogWarning("Reset button is null or destroyed.");
+        }
     }
 
     public void ResetScene()
     {
-        // Reload the current scene
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
