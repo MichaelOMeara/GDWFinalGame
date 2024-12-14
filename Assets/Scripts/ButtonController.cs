@@ -8,6 +8,9 @@ public class ButtonController : MonoBehaviour
     private GameObject instantiatedCode; // Reference to the instantiated code object
     private bool canInteract = false; // Determines if the button is active
 
+    public GameObject movingObject; // The GameObject that will move
+    public float moveSpeed = 5f; // Speed of the moving object
+
     private void Update()
     {
         // Check for mouse click and interaction
@@ -33,6 +36,7 @@ public class ButtonController : MonoBehaviour
     {
         Debug.Log("Button pressed! Displaying numeric code...");
         DisplayCode();
+        MoveObjectAtAngle();
     }
 
     private void DisplayCode()
@@ -43,5 +47,21 @@ public class ButtonController : MonoBehaviour
 
         // Destroy the instantiated prefab after 10 seconds
         Destroy(instantiatedCode, 10f);
+    }
+
+    private void MoveObjectAtAngle()
+    {
+        if (movingObject != null)
+        {
+            // Calculate the direction based on the object's current rotation
+            Vector2 direction = movingObject.transform.right * -1; // Move leftward based on object's angle
+            movingObject.GetComponent<Rigidbody2D>().velocity = direction * moveSpeed;
+
+            Debug.Log("Moving object at angle: " + movingObject.transform.eulerAngles.z);
+        }
+        else
+        {
+            Debug.LogWarning("No moving object assigned!");
+        }
     }
 }
